@@ -11,11 +11,7 @@ import AVFoundation
 
 class ViewController: UIViewController,AVAudioPlayerDelegate{
     
-//    var coinSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "coin", ofType: "wav")!)
-//    var audioPlayer = AVAudioPlayer()
-    
     let nameSounds = ["note1","note2","note3","note4","note5","note6","note7"]
-    var selectedSoundName:String = ""
     var player : AVAudioPlayer!
     
     
@@ -24,33 +20,21 @@ class ViewController: UIViewController,AVAudioPlayerDelegate{
     }
 
 
-
     @IBAction func notePressed(_ sender: UIButton) {
-        selectedSoundName = nameSounds[sender.tag - 1]
-        playSound()
-        
+        playSound(selectedSoundName: nameSounds[sender.tag - 1])
     }
         
-        
-
-    func playSound(){
+    
+    func playSound(selectedSoundName : String){
+        print(selectedSoundName)
         let url = Bundle.main.url(forResource: selectedSoundName, withExtension: "wav")!
         do
         {
             player = try AVAudioPlayer(contentsOf: url)
             
-//            guard let player = player else { return }
-//
-//            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-//
-//            player.prepareToPlay()
-//            player.play()
         }
-            
-//        catch let error
         catch
         {
-//            print(error.localizedDescription)
             print(error)
         }
         player.play()
